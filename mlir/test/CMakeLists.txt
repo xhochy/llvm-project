@@ -43,7 +43,6 @@ configure_lit_site_cfg(
 
 set(MLIR_TEST_DEPENDS
   FileCheck count not
-  MLIRUnitTests
   mlir-capi-ir-test
   mlir-capi-pass-test
   mlir-cpu-runner
@@ -60,6 +59,10 @@ set(MLIR_TEST_DEPENDS
   mlir_c_runner_utils
   mlir_async_runtime
   )
+
+if(TARGET gtest)
+  list(APPEND MLIR_TEST_DEPENDS MLIRUnitTests)
+endif()
 
 if(LLVM_BUILD_EXAMPLES)
   list(APPEND MLIR_TEST_DEPENDS
