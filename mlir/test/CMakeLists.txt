@@ -39,7 +39,6 @@ configure_lit_site_cfg(
 
 set(MLIR_TEST_DEPENDS
   FileCheck count not
-  MLIRUnitTests
   mlir-cpu-runner
   mlir-edsc-builder-api-test
   mlir-linalg-ods-gen
@@ -53,6 +52,9 @@ set(MLIR_TEST_DEPENDS
   mlir_runner_utils
   mlir_c_runner_utils
   )
+if(TARGET gtest)
+  list(APPEND MLIR_TEST_DEPENDS MLIRUnitTests)
+endif()
 
 if(LLVM_BUILD_EXAMPLES)
   list(APPEND MLIR_TEST_DEPENDS

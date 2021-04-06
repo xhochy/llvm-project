@@ -2,6 +2,7 @@ set(LLVM_OPTIONAL_SOURCES
   TestDialect.cpp
   TestPatterns.cpp
 )
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 set(LLVM_TARGET_DEFINITIONS TestInterfaces.td)
 mlir_tablegen(TestTypeInterfaces.h.inc -gen-type-interface-decls)

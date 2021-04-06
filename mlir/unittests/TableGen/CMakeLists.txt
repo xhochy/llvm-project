@@ -8,6 +8,7 @@ mlir_tablegen(StructAttrGenTest.h.inc -gen-struct-attr-decls)
 mlir_tablegen(StructAttrGenTest.cpp.inc -gen-struct-attr-defs)
 add_public_tablegen_target(MLIRTableGenStructAttrIncGen)
 
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 add_mlir_unittest(MLIRTableGenTests
   EnumsGenTest.cpp
   StructsGenTest.cpp

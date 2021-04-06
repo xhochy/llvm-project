@@ -59,6 +59,10 @@ tools = [
     'mlir-tblgen',
     'mlir-translate',
     'mlir-edsc-builder-api-test',
+    'mlir-cpu-runner',
+    'mlir-linalg-ods-gen',
+    'mlir-reduce',
+    'mlir-sdbm-api-test',
 ]
 
 # The following tools are optional

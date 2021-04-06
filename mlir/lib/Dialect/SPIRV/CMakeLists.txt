@@ -5,6 +5,7 @@ endif()
 set(LLVM_TARGET_DEFINITIONS SPIRVCanonicalization.td)
 mlir_tablegen(SPIRVCanonicalization.inc -gen-rewriters)
 add_public_tablegen_target(MLIRSPIRVCanonicalizationIncGen)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_mlir_dialect_library(MLIRSPIRV
   LayoutUtils.cpp
