@@ -23,6 +23,7 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
   set(CMAKE_LIBRARY_OUTPUT_DIRECTORY
     "${CMAKE_CURRENT_BINARY_DIR}/lib${LLVM_LIBDIR_SUFFIX}")
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin")
+  set(MLIR_BUILT_STANDALONE 1)
 endif()
 
 set(MLIR_MAIN_SRC_DIR     ${CMAKE_CURRENT_SOURCE_DIR}  )
@@ -120,6 +121,18 @@ endif()
 
 include_directories( "include")
 include_directories( ${MLIR_INCLUDE_DIR})
+
+if(CMAKE_CROSSCOMPILING AND MLIR_BUILT_STANDALONE)
+  set(LLVM_USE_HOST_TOOLS ON)
+  include(CrossCompile)
+  if (NOT NATIVE_LLVM_DIR)
+    message(FATAL_ERROR
+      "Crosscompiling standalone requires the variables NATIVE_LLVM_DIR
+      for building the native mlir-tblgen used during the build process.")
+  endif()
+  llvm_create_cross_target(mlir NATIVE "" Release
+    -DLLVM_DIR=${NATIVE_LLVM_DIR})
+endif()
 
 # Adding tools/mlir-tblgen here as calling add_tablegen sets some variables like
 # MLIR_TABLEGEN_EXE in PARENT_SCOPE which gets lost if that folder is included
